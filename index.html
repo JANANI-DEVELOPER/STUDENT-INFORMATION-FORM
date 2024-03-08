@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+       body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input,
+select,
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Improved alignment for radio buttons */
+.gender-group {
+    margin-bottom: 15px;
+}
+
+label[for="maleradio"],
+label[for="femaleradio"],
+label[for="othersradio"] {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+button {
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #2ecc71;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+
+    </style>
+    <title>Student-Form</title>
+</head>
+<body>
+    <form>
+    <label for="name">Name</label>
+    <input type="text" id="name" autocomplete="on"><br>
+    <label for="age">Age</label>
+    <input type="number" id="age"><br>
+    <label>Gender</label>
+    <label for="maleradio"> 
+    <input type="radio" name="gender"  id="maleradio" value="Male">Male
+    </label>
+    <label for="femaleradio">
+        <input type="radio" name="gender" id="femaleradio" value="Female">Female
+    </label>
+    <label for="othersradio">
+        <input type="radio" name="gender" id="othersradio" value="others">Others
+    </label><br>
+    <label for="selectCourse">Course</label>
+    <select id="selectCourse" name="course" title="select a course">
+        <option value="JAVA">Java</option>
+        <option value="PYTHON">Python</option>
+        <option value="C">C</option>
+        <option value="C++">C++</option>
+    </select><br>
+    <label for="email">Email</label>
+    <input type="email" id="email" autocomplete="email"> <br>
+    <button type="button"  onclick="info()">Submit</button>
+    </form>
+    <table border="2" id="dataTable">
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>AGE</th>
+                <th>GENDER</th>
+                <th>COURSE</th>
+                <th>MAIL</th>
+                <th>ACTION</th>
+            </tr>
+        </thead>
+        <tbody id="dataBody"></tbody>
+    </table>
+    </thead>
+<script>
+
+function info() {
+    var n = document.getElementById("name").value;
+    var a = document.getElementById("age").value
+    var gender = document.querySelector('input[name="gender"]:checked').value;
+var selected_course=document.getElementById("selectCourse").value
+
+var email = document.getElementById("email").value
+
+//Creating new row
+var newRow = document.createElement("tr");
+
+//Creating new cells
+var nameCell = document.createElement("td");
+nameCell.textContent = n;
+newRow.appendChild(nameCell);
+
+var ageCell = document.createElement("td");
+ageCell.textContent = a;
+newRow.appendChild(ageCell);
+
+var genderCell = document.createElement("td");
+genderCell.textContent = gender;
+newRow.appendChild(genderCell);
+
+var courseCell = document.createElement("td");
+courseCell.textContent = selected_course;
+newRow.appendChild(courseCell);
+
+var emailCell = document.createElement("td");
+emailCell.textContent= email;
+newRow.appendChild(emailCell);
+
+var buttonCell = document.createElement("td");
+var actionButton = document.createElement("button");
+actionButton.textContent= "Delete";
+
+actionButton.addEventListener("click",function () {
+    deleteRow(newRow);});
+
+buttonCell.appendChild(actionButton);
+newRow.appendChild(buttonCell);
+
+
+document.getElementById("dataBody").appendChild(newRow);
+
+document.getElementById("name").value = "";
+            document.getElementById("age").value = "";
+            document.querySelector('input[name="gender"]:checked').checked = false;
+            document.getElementById("selectCourse").selectedIndex = 0;
+            document.getElementById("email").value = "";
+        
+
+
+    
+}
+
+function deleteRow(row) {
+    row.remove();
+}
+
+</script>
+</body>
+</html>
